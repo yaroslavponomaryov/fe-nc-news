@@ -29,7 +29,7 @@ function App() {
   return (
     <>
     <Nav/>
-    <div className='container text-center main-body'>
+    <main className='container text-center main-body'>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/articles" element={ 
@@ -41,7 +41,7 @@ function App() {
         }></Route>
 
       </Routes>
-    </div>
+    </main>
     </>
   )
 }

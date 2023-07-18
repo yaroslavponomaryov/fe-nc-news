@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const ArticleCard = ({title, author, date, img, comments, votes}) => {
     return (
-    <div className="card article-card text-center">
+    <section className="card article-card text-center">
     <img src={img} className="card-img-top" alt={`Cover for "${title}" article`}/>
     <div className="card-body">
         <h5 className="card-title">{title}</h5>
@@ -14,7 +14,7 @@ const ArticleCard = ({title, author, date, img, comments, votes}) => {
         </ul>
         <Link to="#" className="btn btn-primary">Read more...</Link>
     </div>
-    </div>
+    </section>
     )
 }
 
