@@ -10,7 +10,7 @@ const ArticlesList = ({articles}) => {
             author={article.author}
             date={article.created_at}
             comments={article.comment_count}
-            votes={article.votes} className="p-2 flex-grow-2"/>
+            votes={article.votes} id={article.article_id} className="p-2 flex-grow-2"/>
         })}
         </ul>
     )

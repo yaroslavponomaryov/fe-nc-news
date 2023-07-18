@@ -5,6 +5,8 @@ import { getAllArticles } from './api'
 import Home from './components/Home'
 import Nav from './components/Nav'
 import ArticlesList from './components/ArticlesLst'
+import SingleArticle from './components/SingleArticle'
+import Error from './components/Error'
 
 function App() {
   const [isError, setIsError] = useState(false)
@@ -39,7 +41,8 @@ function App() {
         </div>) : (<ArticlesList articles={articles}/>)
         )
         }></Route>
-
+        <Route path='/articles/:article_id' element={<SingleArticle />}></Route>
+        <Route path="*" element={<Error status={404} msg={"Page doesn't exist"}/>}></Route>
       </Routes>
     </main>
     </>
