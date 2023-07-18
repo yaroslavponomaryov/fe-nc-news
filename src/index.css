@@ -15,3 +15,20 @@
     max-width: 18rem;
     margin:auto;
 }
+
+.comment-card {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.articles-list {
+    list-style: none;
+    padding-left: 0;
+
+}
+
+.comment-list {
+    list-style: none;
+    padding-left: 0;
+
+}

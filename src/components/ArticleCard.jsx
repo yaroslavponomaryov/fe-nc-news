@@ -19,8 +19,6 @@ const ArticleCard = ({title, author, date, img, comments, votes, id, text}) => {
             <div className="card-body">
                 <Link to={`/articles/${id}`} className="btn btn-primary">Read more...</Link>
             </div>
-
-
             <p className="card-text"><small className="text-body-secondary">Last updated {date}</small></p>
         </div>
         </div>
