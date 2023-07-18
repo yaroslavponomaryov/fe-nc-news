@@ -4,8 +4,7 @@ const Nav = () => {
     return (
         <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-            <img src="/src/assets/nc-logo.png" alt="Northcoders logo" className="d-inline-block align-text-top"/>
-            <Link to="/" className="navbar-brand">NC News</Link>
+            <Link to="/" className="navbar-brand"> <img src="/src/assets/nc-logo.png" alt="Northcoders logo" className="d-inline-block align-text-top logo-img"/> NC News</Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
@@ -21,6 +20,9 @@ const Nav = () => {
                 <ul className="dropdown-menu">
                     <li><Link to="/articles" className="dropdown-item" href="#">All</Link></li>
                     <li><hr className="dropdown-divider"/></li>
+                    <li><Link to="/articles" className="dropdown-item disabled" href="#">Topic 1</Link></li>
+                    <li><Link to="/articles" className="dropdown-item disabled" href="#">Topic 2</Link></li>
+                    <li><Link to="/articles" className="dropdown-item disabled" href="#">Topic 3</Link></li>
                 </ul>
                 </li>
                 <li className="nav-item">

@@ -9,3 +9,12 @@ export const getAllArticles = () => {
             return res.data;
         })
 }
+
+export const getArticleById = (id) => {
+    return ncNews
+        .get(`/articles/${id}`)
+        .then((res) => {
+            return res.data
+        })
+
+}

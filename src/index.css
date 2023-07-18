@@ -2,6 +2,16 @@
     color: red;
 }
 
+.logo-img {
+    height: 1.7rem;
+    margin-right : 0.8rem;
+}
+
 .main-body {
     margin-top: 5rem;
+}
+
+.text-bg-danger {
+    max-width: 18rem;
+    margin:auto;
 }
