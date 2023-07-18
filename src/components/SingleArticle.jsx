@@ -29,14 +29,18 @@ const SingleArticle = () => {
         <section className="row spinner-border" role="status">
         <span className="visually-hidden"></span>
       </section>) : isError ? (<Error status={isError.status} msg={isError.msg}/>) : (
-          <ArticleCard 
-              title={article.title} 
-              text={article.body}
-              img={article.article_img_url}
-              author={article.author}
-              date={article.created_at}
-              comments={article.comment_count}
-              votes={article.votes} id={article.article_id} className="p-2 flex-grow-2"/>
+        <section className="card">
+            <img src={article.article_img_url} className="card-img-top" alt={`Cover for "${article.title}" article`}/>
+            <div className="card-body">
+                <h5 className="card-title">{article.title}</h5>
+                <p className="card-text">{article.body}</p>
+            </div>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item"><b>Author</b>: {article.author}</li>
+                    <li className="list-group-item"><b>Posted:</b> {article.created_at}</li>
+                    <li className="list-group-item"><b>Votes:</b> {article.votes}</li>
+                </ul>
+        </section>
       )
 
 }
