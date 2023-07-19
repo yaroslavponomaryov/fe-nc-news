@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById } from "../api";
+import { getArticleById, updateArticleVotes } from "../api";
 import Error from "./Error";
 import CommentList from "./CommentList";
+import { articleVotesChanger } from "../utils/utils";
 
 const SingleArticle = () => {
     const {article_id} = useParams();
@@ -24,6 +25,11 @@ const SingleArticle = () => {
         })
     }, [])
 
+    const handleClick = (vote) => {
+        updateArticleVotes(article_id, vote)
+        setArticle(articleVotesChanger(article, vote))
+    }
+
     return isLoading ? (
         <section className="row spinner-border" role="status">
         <span className="visually-hidden"></span>
@@ -35,10 +41,22 @@ const SingleArticle = () => {
                 <h5 className="card-title">{article.title}</h5>
                 <p className="card-text">{article.body}</p>
             </div>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item"><b>Author</b>: {article.author}</li>
-                    <li className="list-group-item"><b>Posted:</b> {article.created_at}</li>
-                    <li className="list-group-item"><b>Votes:</b> {article.votes}</li>
+                <ul className="row align-items-start">
+                    <li className="col list-group-item"><b>Author</b>: {article.author}</li>
+                    <li className="col list-group-item">
+                        <div className="likes-container">
+                            <button type="button" className="btn btn-outline-primary like" aria-label="like" onClick={(e) => {handleClick(1)
+                            e.target.classList.add('disabled')
+                            document.getElementsByClassName("dislike")[0].classList.remove('disabled')
+                            }}>👍 {article.votes}</button>
+                            <button type="button" className="btn btn-outline-primary dislike " aria-label="dislike" onClick={(e) => {handleClick(-1)
+                            e.target.classList.add('disabled')
+                            document.getElementsByClassName("like")[0].classList.remove('disabled')
+                            }}>👎</button>
+                        </div>
+                        </li>
+                        
+                    <li className="col list-group-item"><b>Posted:</b> {article.created_at}</li>
                 </ul>
         </section>
         <section className="accordion accordion-flush" id="comments">
