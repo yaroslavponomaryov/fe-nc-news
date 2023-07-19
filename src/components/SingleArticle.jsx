@@ -52,7 +52,7 @@ const SingleArticle = () => {
                             <button type="button" className="btn btn-outline-primary dislike " aria-label="dislike" onClick={(e) => {handleClick(-1)
                             e.target.classList.add('disabled')
                             document.getElementsByClassName("like")[0].classList.remove('disabled')
-                            }}>👎 {article.votes < 0 ? (" "+ article.votes) : (null)}</button>
+                            }}>👎 {article.votes < 0 ? (" "+ article.votes*-1) : (null)}</button>
                         </div>
                         </li>
                         
