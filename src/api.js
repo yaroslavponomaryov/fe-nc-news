@@ -18,3 +18,11 @@ export const getArticleById = (id) => {
         })
 
 }
+
+export const getCommentsForArticle = (article_id) => {
+    return ncNews
+    .get(`/articles/${article_id}/comments`)
+    .then((res) => {
+        return res.data
+    })
+}

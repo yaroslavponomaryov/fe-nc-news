@@ -2,7 +2,7 @@ import ArticleCard from "./ArticleCard";
 
 const ArticlesList = ({articles}) => {
     return (
-        <ul className="d-flex flex-column">
+        <ul className="d-flex flex-column articles-list">
         {articles.map((article) => {
             return <ArticleCard key={article.article_id} 
             title={article.title} 
