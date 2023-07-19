@@ -59,10 +59,10 @@ const SingleArticle = () => {
                     <li className="col list-group-item"><b>Posted:</b> {article.created_at}</li>
                 </ul>
         </section>
-        <section className="accordion accordion-flush" id="comments">
+        <section className="accordion accordion-flush" id="comments" >
             <div className="accordion-item">
                 <h2 className="accordion-header">
-                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" onClick="location.href='#cmnts'">
                     Show/Hide Comments
                 </button>
                 </h2>
