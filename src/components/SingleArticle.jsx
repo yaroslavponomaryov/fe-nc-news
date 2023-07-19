@@ -48,11 +48,11 @@ const SingleArticle = () => {
                             <button type="button" className="btn btn-outline-primary like" aria-label="like" onClick={(e) => {handleClick(1)
                             e.target.classList.add('disabled')
                             document.getElementsByClassName("dislike")[0].classList.remove('disabled')
-                            }}>👍 {article.votes}</button>
+                            }}>👍{article.votes >= 0 ? (" "+ article.votes) : (null)}</button>
                             <button type="button" className="btn btn-outline-primary dislike " aria-label="dislike" onClick={(e) => {handleClick(-1)
                             e.target.classList.add('disabled')
                             document.getElementsByClassName("like")[0].classList.remove('disabled')
-                            }}>👎</button>
+                            }}>👎 {article.votes < 0 ? (" "+ article.votes) : (null)}</button>
                         </div>
                         </li>
                         
