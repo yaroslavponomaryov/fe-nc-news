@@ -32,3 +32,27 @@
     padding-left: 0;
 
 }
+
+.like {
+    border: blue;
+    border-radius: 8px 0px 0px 8px;
+    border: none;
+}
+.dislike {
+    border-radius: 0px 8px 8px 0px;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    margin: 0;
+
+}
+
+.likes-container {
+    border-radius: 8px 8px 8px 8px;
+    display: inline-block;
+    margin-left: auto;
+    border: 0.1rem solid #0275d8;
+    margin: 0;
+    padding: 0;
+
+}

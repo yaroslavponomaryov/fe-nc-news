@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById } from "../api";
+import { getArticleById, updateArticleVotes } from "../api";
 import Error from "./Error";
 import CommentList from "./CommentList";
 
@@ -9,6 +9,7 @@ const SingleArticle = () => {
     const [article, setArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(undefined)
+    const [userVotes, setUserVotes] = useState(0)
 
     useEffect(()=>{
         getArticleById(article_id)
@@ -18,11 +19,20 @@ const SingleArticle = () => {
         .then(() => {
             setIsLoading(false)
         })
-        .catch((err) => {
+        .catch(() => {
             setIsLoading(false)
             setIsError({status: err.response.data.status, msg: err.response.data.msg})
         })
     }, [])
+
+    const handleClick = (vote) => {
+        setUserVotes((currentVotes) => {return currentVotes + vote})
+        updateArticleVotes(article_id, vote)
+            .catch((err) => {
+                setUserVotes((currentVotes) => {return currentVotes + -vote})
+                alert('Something went wrong...')
+            })
+    }
 
     return isLoading ? (
         <section className="row spinner-border" role="status">
@@ -35,16 +45,31 @@ const SingleArticle = () => {
                 <h5 className="card-title">{article.title}</h5>
                 <p className="card-text">{article.body}</p>
             </div>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item"><b>Author</b>: {article.author}</li>
-                    <li className="list-group-item"><b>Posted:</b> {article.created_at}</li>
-                    <li className="list-group-item"><b>Votes:</b> {article.votes}</li>
+                <ul className="row align-items-start">
+                    <li className="col list-group-item"><b>Author</b>: {article.author}</li>
+                    <li className="col list-group-item">
+                        <div className="likes-container">
+
+                            <button type="button" className="btn btn-outline-primary like" aria-label="like" onClick={(e) => {handleClick(1)
+                            e.target.classList.add('disabled')
+                            document.getElementsByClassName("dislike")[0].classList.remove('disabled')
+                            }}>👍{article.votes + userVotes >= 0 ? (" " + (article.votes + userVotes)) : (null)}</button>
+                            
+                            <button type="button" className="btn btn-outline-primary dislike " aria-label="dislike" onClick={(e) => {handleClick(-1)
+                            e.target.classList.add('disabled')
+                            document.getElementsByClassName("like")[0].classList.remove('disabled')
+                            }}>👎 {article.votes + userVotes < 0 ? (" " + ((article.votes + userVotes)*-1)) : (null)}</button>
+
+                        </div>
+                        </li>
+                        
+                    <li className="col list-group-item"><b>Posted:</b> {article.created_at}</li>
                 </ul>
         </section>
         <section className="accordion accordion-flush" id="comments">
             <div className="accordion-item">
                 <h2 className="accordion-header">
-                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" >
                     Show/Hide Comments
                 </button>
                 </h2>
