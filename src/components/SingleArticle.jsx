@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import { getArticleById, updateArticleVotes } from "../api";
 import Error from "./Error";
 import CommentList from "./CommentList";
-import { articleVotesChanger } from "../utils/utils";
 
 const SingleArticle = () => {
     const {article_id} = useParams();
     const [article, setArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(undefined)
+    const [userVotes, setUserVotes] = useState(0)
 
     useEffect(()=>{
         getArticleById(article_id)
@@ -19,15 +19,19 @@ const SingleArticle = () => {
         .then(() => {
             setIsLoading(false)
         })
-        .catch((err) => {
+        .catch(() => {
             setIsLoading(false)
             setIsError({status: err.response.data.status, msg: err.response.data.msg})
         })
     }, [])
 
     const handleClick = (vote) => {
+        setUserVotes((currentVotes) => {return currentVotes + vote})
         updateArticleVotes(article_id, vote)
-        setArticle(articleVotesChanger(article, vote))
+            .catch((err) => {
+                setUserVotes((currentVotes) => {return currentVotes + -vote})
+                alert('Something went wrong...')
+            })
     }
 
     return isLoading ? (
@@ -45,14 +49,17 @@ const SingleArticle = () => {
                     <li className="col list-group-item"><b>Author</b>: {article.author}</li>
                     <li className="col list-group-item">
                         <div className="likes-container">
+
                             <button type="button" className="btn btn-outline-primary like" aria-label="like" onClick={(e) => {handleClick(1)
                             e.target.classList.add('disabled')
                             document.getElementsByClassName("dislike")[0].classList.remove('disabled')
-                            }}>👍{article.votes >= 0 ? (" "+ article.votes) : (null)}</button>
+                            }}>👍{article.votes + userVotes >= 0 ? (" " + (article.votes + userVotes)) : (null)}</button>
+                            
                             <button type="button" className="btn btn-outline-primary dislike " aria-label="dislike" onClick={(e) => {handleClick(-1)
                             e.target.classList.add('disabled')
                             document.getElementsByClassName("like")[0].classList.remove('disabled')
-                            }}>👎 {article.votes < 0 ? (" "+ article.votes*-1) : (null)}</button>
+                            }}>👎 {article.votes + userVotes < 0 ? (" " + ((article.votes + userVotes)*-1)) : (null)}</button>
+
                         </div>
                         </li>
                         
