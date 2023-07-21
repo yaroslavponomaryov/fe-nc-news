@@ -25,7 +25,7 @@ const ArticlesList = () => {
           setIsLoading(false);
           setIsError(true);
         })
-      }, []);
+      }, [searchParams]);
 
 
     return (
