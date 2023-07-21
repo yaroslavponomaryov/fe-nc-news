@@ -7,8 +7,7 @@ const ArticlesList = () => {
     let [searchParams, setSearchParams] = useSearchParams()
     let topic = searchParams.get("topic")
     topic ? null : topic=''
-
-    console.log(topic)
+    
     const [articles, setArticles] = useState([]);
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
