@@ -2,10 +2,12 @@ import axios from "axios"
 
 const ncNews = axios.create({baseURL:'https://northcoders-news-jduz.onrender.com/api'})
 
-export const getAllArticles = (topic) => {
+export const getAllArticles = (topic, sort_by, order) => {
     return ncNews
         .get('/articles/', {params: {
-            topic
+            topic,
+            sort_by,
+            order
         }})
         .then((res) => {
             return res.data;

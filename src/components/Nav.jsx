@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllTopics } from "../api";
 
-const Nav = ({topics}) => {
+const Nav = ({setSearchParams, searchParams, setQuery, topics}) => {
+
+    const newParams = new URLSearchParams(searchParams);
 
     return (
         <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
@@ -25,7 +27,11 @@ const Nav = ({topics}) => {
                     <li><hr className="dropdown-divider"/></li>
                     {topics.map((topic)=>{
                         return (
-                            <li key={topic.slug}><Link to={`/articles?topic=${topic.slug}`} className="dropdown-item">{topic.slug.charAt(0).toUpperCase()+topic.slug.slice(1)}</Link></li>
+                            <li key={topic.slug}><Link className="dropdown-item" onClick={(e)=>{
+                                e.preventDefault()
+                                newParams.set('topic', topic.slug)
+                                setSearchParams(newParams)
+                                setQuery(`?topic=${topic.slug}`)}}>{topic.slug.charAt(0).toUpperCase()+topic.slug.slice(1)}</Link></li>
                         )
                     })}
                 </ul>
