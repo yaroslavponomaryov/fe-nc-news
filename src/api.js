@@ -4,7 +4,9 @@ const ncNews = axios.create({baseURL:'https://northcoders-news-jduz.onrender.com
 
 export const getAllArticles = (topic) => {
     return ncNews
-        .get(`/articles?topic=${topic}`)
+        .get('/articles/', {params: {
+            topic
+        }})
         .then((res) => {
             return res.data;
         })

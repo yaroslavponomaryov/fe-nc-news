@@ -21,11 +21,11 @@ const Nav = ({topics}) => {
                     Articles
                 </Link>
                 <ul className="dropdown-menu">
-                    <li><Link to="/articles" className="dropdown-item" href="#">All</Link></li>
+                    <li><Link to="/articles" className="dropdown-item">All</Link></li>
                     <li><hr className="dropdown-divider"/></li>
                     {topics.map((topic)=>{
                         return (
-                            <li key={topic.slug}><Link to={`/articles?topic=${topic.slug}`} className="dropdown-item" href="#">{topic.slug.charAt(0).toUpperCase()+topic.slug.slice(1)}</Link></li>
+                            <li key={topic.slug}><Link to={`/articles?topic=${topic.slug}`} className="dropdown-item">{topic.slug.charAt(0).toUpperCase()+topic.slug.slice(1)}</Link></li>
                         )
                     })}
                 </ul>

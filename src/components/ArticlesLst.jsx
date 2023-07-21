@@ -4,9 +4,8 @@ import ArticleCard from "./ArticleCard";
 import { useParams, useSearchParams } from "react-router-dom";
 
 const ArticlesList = () => {
-    let [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     let topic = searchParams.get("topic")
-    topic ? null : topic=''
     
     const [articles, setArticles] = useState([]);
     const [isError, setIsError] = useState(false)
@@ -32,9 +31,9 @@ const ArticlesList = () => {
               (
                 isLoading ? 
                 (
-                  <div className="row spinner-border" role="status">
+                  <section className="row spinner-border" role="status">
                     <span className="visually-hidden"></span>
-                  </div>
+                  </section>
                 ) : 
                 (
         <ul className="d-flex flex-column articles-list">
