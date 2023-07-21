@@ -22,7 +22,7 @@ const CommentList = ({article_id}) => {
                 setIsLoading(false)
                 setIsError({status: err.response.data.status, msg: err.response.data.msg})
             })
-    }, [])
+    }, [articleComments])
     return (
     <>
     <CommentAddForm article_id={article_id} setArticleComments={setArticleComments}/>
@@ -41,6 +41,7 @@ const CommentList = ({article_id}) => {
                 <div id="flush-collapseOne" className="accordion-collapse collapse" data-bs-parent="#comments">
                 <div className="accordion-body">
                     <ul className="comment-list">{
+                        
                         articleComments.map((comment, index) => {
                             return <CommentCard key={index} comment={comment} index={index+1}/>
                         })}
