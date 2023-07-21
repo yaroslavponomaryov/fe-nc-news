@@ -34,15 +34,16 @@ const CommentAddForm = ({article_id, setArticleComments}) => {
             <form className="form-floating mb-3 comment-box" onSubmit={(event)=>{
                 handleSubmit(event);
                 document.getElementsByClassName('comment-sender-btn')[0].classList.add('disabled')
+                setComment('')
             }}>
                 <textarea className="form-control comment-text" id="floatingInput"  placeholder="This is a fab article! I like it very much!" value={comment} onChange={(event)=>{
                     setComment(event.target.value)
                     validateComment(comment)
                 }}/>
                 <label htmlFor="floatingInput">Your comment goes here:</label>
-                <div id="validationServer05Feedback" className="invalid-feedback">
+                <p id="validationServer05Feedback" className="invalid-feedback">
                 Comment should be at least 20 characters long.
-                </div>
+                </p>
                 <button type="button comment-button" className="btn btn-outline-primary comment-sender-btn disabled">Post a comment!</button>
             </form>
     )
