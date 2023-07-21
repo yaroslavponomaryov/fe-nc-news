@@ -3,7 +3,7 @@ const CommentCard = ({comment, index}) => {
         <li className="card border-dark mb-3 comment-card">
         <div className="card-header">Comment #{index}</div>
         <div className="card-body">
-            <h5 className="card-title">{comment.author}:</h5>
+            <h5 className="card-title">@{comment.author}</h5>
             <p className="card-text">{comment.body}</p>
         </div>
         <ul className="list-group list-group-flush">

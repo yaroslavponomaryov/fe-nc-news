@@ -27,6 +27,10 @@
 
 }
 
+.single-article {
+    margin-bottom: 1rem;
+}
+
 .comment-list {
     list-style: none;
     padding-left: 0;
@@ -55,4 +59,21 @@
     margin: 0;
     padding: 0;
 
+}
+
+.single-article-ul {
+    padding: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.comment-box {
+    margin-top: 1rem;
+}
+.comment-text {
+    margin-bottom: 1rem;
+}
+
+.invalid-feedback {
+    margin-bottom: 1rem;
 }

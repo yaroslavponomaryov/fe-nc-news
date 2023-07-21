@@ -35,6 +35,15 @@ export const updateArticleVotes = (article_id, vote) => {
         .patch(`/articles/${article_id}`, {inc_votes: vote})
 }
 
+export const postComment = (article_id, comment) => {
+    const reqBody = {
+        username: 'tickle122',
+        body: comment
+      }
+    return ncNews
+        .post(`/articles/${article_id}/comments`, reqBody)
+}
+
 export const getAllTopics = () => {
     return ncNews
         .get('/topics/')

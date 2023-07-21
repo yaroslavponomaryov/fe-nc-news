@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticleById, updateArticleVotes } from "../api";
 import Error from "./Error";
 import CommentList from "./CommentList";
+import CommentAddForm from "./CommentAddForm";
 
 const SingleArticle = () => {
     const {article_id} = useParams();
@@ -39,13 +40,13 @@ const SingleArticle = () => {
         <span className="visually-hidden"></span>
       </section>) : isError ? (<Error status={isError.status} msg={isError.msg}/>) : (
         <>
-        <section className="card">
+        <section className="card single-article">
             <img src={article.article_img_url} className="card-img-top" alt={`Cover for "${article.title}" article`}/>
             <div className="card-body">
                 <h5 className="card-title">{article.title}</h5>
                 <p className="card-text">{article.body}</p>
             </div>
-                <ul className="row align-items-start">
+                <ul className="row align-items-start single-article-ul">
                     <li className="col list-group-item"><b>Author</b>: {article.author}</li>
                     <li className="col list-group-item">
                         <div className="likes-container">
@@ -66,18 +67,7 @@ const SingleArticle = () => {
                     <li className="col list-group-item"><b>Posted:</b> {article.created_at}</li>
                 </ul>
         </section>
-        <section className="accordion accordion-flush" id="comments">
-            <div className="accordion-item">
-                <h2 className="accordion-header">
-                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" >
-                    Show/Hide Comments
-                </button>
-                </h2>
-                <div id="flush-collapseOne" className="accordion-collapse collapse" data-bs-parent="#comments">
-                <div className="accordion-body"><CommentList article_id={article_id} /></div>
-                </div>
-            </div>
-        </section>
+            <CommentList article_id={article_id} />
         </>
       )
 
