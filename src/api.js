@@ -2,9 +2,9 @@ import axios from "axios"
 
 const ncNews = axios.create({baseURL:'https://northcoders-news-jduz.onrender.com/api'})
 
-export const getAllArticles = () => {
+export const getAllArticles = (topic) => {
     return ncNews
-        .get('/articles')
+        .get(`/articles?topic=${topic}`)
         .then((res) => {
             return res.data;
         })
@@ -31,4 +31,12 @@ export const updateArticleVotes = (article_id, vote) => {
     
     return ncNews
         .patch(`/articles/${article_id}`, {inc_votes: vote})
+}
+
+export const getAllTopics = () => {
+    return ncNews
+        .get('/topics/')
+        .then(({data})=>{
+            return data
+        })
 }
