@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAllTopics } from "../api";
 
-const Nav = () => {
+const Nav = ({topics}) => {
+
     return (
         <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
@@ -18,11 +21,13 @@ const Nav = () => {
                     Articles
                 </Link>
                 <ul className="dropdown-menu">
-                    <li><Link to="/articles" className="dropdown-item" href="#">All</Link></li>
+                    <li><Link to="/articles" className="dropdown-item">All</Link></li>
                     <li><hr className="dropdown-divider"/></li>
-                    <li><Link to="/articles" className="dropdown-item disabled" href="#">Topic 1</Link></li>
-                    <li><Link to="/articles" className="dropdown-item disabled" href="#">Topic 2</Link></li>
-                    <li><Link to="/articles" className="dropdown-item disabled" href="#">Topic 3</Link></li>
+                    {topics.map((topic)=>{
+                        return (
+                            <li key={topic.slug}><Link to={`/articles?topic=${topic.slug}`} className="dropdown-item">{topic.slug.charAt(0).toUpperCase()+topic.slug.slice(1)}</Link></li>
+                        )
+                    })}
                 </ul>
                 </li>
                 <li className="nav-item">

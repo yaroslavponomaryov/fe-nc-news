@@ -1,7 +1,41 @@
+import { useEffect, useState } from "react";
+import { getAllArticles } from "../api";
 import ArticleCard from "./ArticleCard";
+import { useParams, useSearchParams } from "react-router-dom";
 
-const ArticlesList = ({articles}) => {
+const ArticlesList = () => {
+    const [searchParams, setSearchParams] = useSearchParams()
+    let topic = searchParams.get("topic")
+    
+    const [articles, setArticles] = useState([]);
+    const [isError, setIsError] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        getAllArticles(topic)
+        .then(({articles}) => {
+          setArticles(articles)
+        })
+        .then(() => {
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsLoading(false);
+          setIsError(true);
+        })
+      }, [searchParams]);
+
+
     return (
+        isError ? (<p>Something is wrong</p>) : 
+              (
+                isLoading ? 
+                (
+                  <section className="row spinner-border" role="status">
+                    <span className="visually-hidden"></span>
+                  </section>
+                ) : 
+                (
         <ul className="d-flex flex-column articles-list">
         {articles.map((article) => {
             return <ArticleCard key={article.article_id} 
@@ -13,6 +47,8 @@ const ArticlesList = ({articles}) => {
             votes={article.votes} id={article.article_id} className="p-2 flex-grow-2"/>
         })}
         </ul>
+                )
+              )
     )
 }
 
